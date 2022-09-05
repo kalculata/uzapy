@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn import datasets
-from uzapy.logistic_regression import LogisticRegression
+from uzapy.regression import LogisticRegression
 from uzapy.utils import *
 
 bc = datasets.load_breast_cancer()
