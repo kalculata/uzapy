@@ -1,4 +1,3 @@
-from audioop import bias
 import numpy as np
 
 class LinearRegression:
@@ -20,10 +19,10 @@ class LinearRegression:
       dw = (1/n_samples) * np.dot(X.T, (y_predicted - y))
       db = (1/n_samples) * np.sum(y_predicted - y)
 
+      # update parameters
       self.weights -= self.lr * dw
       self.bias -= self.lr * db
 
   def predict(self, X):
-    y_predicted = np.dot(X, self.weights) + self.bias
-    return y_predicted
+    return np.dot(X, self.weights) + self.bias
  

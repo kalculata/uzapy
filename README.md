@@ -6,7 +6,7 @@ Python machine learning framework
 
 - Supervised learning
   - [*] Linear regression
-  - [ ] Logestic regression
+  - [*] Logestic regression
   - [ ] Decision tree
   - [ ] SVM (Support Vector Machine)
   - [ ] Naive bayes algorithm
@@ -27,3 +27,5 @@ Python machine learning framework
     - [ ] LSTM (Long short-term memory
 - Losses functions
   - [*] MSE (Mean Squared Error)
+- Activations functions
+  - [*] Sigmoid
