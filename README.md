@@ -5,7 +5,7 @@ Python machine learning framework
 ## Algorthms
 
 - Supervised learning
-  - [ ] Linear regression
+  - [*] Linear regression
   - [ ] Logestic regression
   - [ ] Decision tree
   - [ ] SVM (Support Vector Machine)
@@ -24,4 +24,6 @@ Python machine learning framework
     - [ ] DNN (Dense Neural Network)
     - [ ] CNN (Convolutional Neural Network)
     - [ ] RNN (Recurrent Neural Network)
-    - [ ] LSTM (Long short-term memory)
+    - [ ] LSTM (Long short-term memory
+- Losses functions
+  - [*] MSE (Mean Squared Error)
