@@ -1,3 +1,6 @@
 env/
 *__pycache__/
-explore.ipynb
+*.csv
+
+dev.ipynb
+dev.py
