@@ -2,6 +2,23 @@
 
 Python machine learning framework
 
+## Features
+
+### Weights initializers
+
+- zeros
+- ones,
+- standard_distribution,
+- uniform_distribution,
+- xavier_normal
+- glorat_normal
+- xavier_uniform
+- glorat_uniform
+- he_normal
+- he_uniform
+- lecun_normal
+- lecun_uniform
+
 ## TODO
 
 ### Algorthms
