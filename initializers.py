@@ -9,6 +9,8 @@ def generate(initializer, fan_in, fan_out=1, for_weights=True):
 
   if initializer   == 'zeros':
     return zeros(fan_in, fan_out)
+  elif initializer   == 'ones':
+    return ones(fan_in, fan_out)
   elif initializer == 'standard_distribution':
     return standard_distribution(fan_in, fan_out)
   elif initializer == 'uniform_distribution':
@@ -29,6 +31,9 @@ def generate(initializer, fan_in, fan_out=1, for_weights=True):
 
 def zeros(fan_in, fan_out):
   return np.zeros((fan_out, fan_in))
+
+def ones(fan_in, fan_out):
+  return np.ones((fan_out, fan_in))
 
 def standard_distribution(fan_in, fan_out):
   return np.random.normal(loc=0, scale=1, size=(fan_out, fan_in))
