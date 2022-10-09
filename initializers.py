@@ -46,36 +46,36 @@ def zeros(fan_in, fan_out):
   return np.zeros((fan_out, fan_in))
 
 def standard_distribution(fan_in, fan_out):
-  return np.random.normal(loc=0, scale=1, size=(fan_out, fan_in))
+  return np.random.normal(loc=0, scale=1, size=(fan_in, fan_out))
 
 def uniform_distribution(fan_in, fan_out):
   low  = -1/sqrt(fan_in)
   high =  1/sqrt(fan_in)
-  return np.random.uniform(low=low, high=high, size=(fan_out, fan_in))
+  return np.random.uniform(low=low, high=high, size=(fan_in, fan_out))
 
 def xavier_normal(fan_in, fan_out):
   std = sqrt(2/(fan_in + fan_out))
-  return np.random.normal(loc=0, scale=std, size=(fan_out, fan_in))
+  return np.random.normal(loc=0, scale=std, size=(fan_in, fan_out))
 
 def xavier_uniform(fan_in, fan_out):
   low  = -sqrt(6)/sqrt(fan_in + fan_out)
   high =  sqrt(6)/sqrt(fan_in + fan_out)
-  return np.random.uniform(low=low, high=high, size=(fan_out, fan_in))
+  return np.random.uniform(low=low, high=high, size=(fan_in, fan_out))
 
 def he_normal(fan_in, fan_out):
   std = sqrt(2/fan_in )
-  return np.random.normal(loc=0, scale=std, size=(fan_out, fan_in))
+  return np.random.normal(loc=0, scale=std, size=(fan_in, fan_out))
 
 def he_uniform(fan_in, fan_out):
   low  = -sqrt(6/fan_in)
   high =  sqrt(6/fan_in)
-  return np.random.uniform(low=low, high=high, size=(fan_out, fan_in))
+  return np.random.uniform(low=low, high=high, size=(fan_in, fan_out))
 
 def lecun_normal(fan_in, fan_out):
   std = sqrt(1/fan_in )
-  return np.random.normal(loc=0, scale=std, size=(fan_out, fan_in))
+  return np.random.normal(loc=0, scale=std, size=(fan_in, fan_out))
 
 def lecun_uniform(fan_in, fan_out):
   low  = -sqrt(3/fan_in)
   high =  sqrt(3/fan_in)
-  return np.random.uniform(low=low, high=high, size=(fan_out, fan_in))
+  return np.random.uniform(low=low, high=high, size=(fan_in, fan_out))

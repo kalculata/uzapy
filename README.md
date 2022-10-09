@@ -8,8 +8,8 @@ Python machine learning framework
 
 - zeros
 - ones,
-- standard_distribution,
-- uniform_distribution,
+- standard_distribution
+- uniform_distribution
 - xavier_normal
 - glorat_normal
 - xavier_uniform
@@ -36,16 +36,16 @@ Python machine learning framework
 - [ ] AdaBoosting
 - [ ] Gradient boosting
 - [ ] K-Means
-- [ ] Genetic algoritm
+- [ ] Genetic algorithms
 - [ ] DNN (Dense Neural Network)
 - [ ] CNN (Convolutional Neural Network)
 - [ ] RNN (Recurrent Neural Network)
 - [ ] LSTM (Long short-term memory)
 - [ ] Transformers
 
-### Project
+### Projects
 
 - [ ] chatbot from scratch
 - [ ] face detection
-- [ ] flou remover in images
+- [ ] flou remouver in images
 - [ ] SpeechRecognition from scratch
