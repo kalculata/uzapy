@@ -30,7 +30,6 @@ class Dense:
 		
 		self.weights = generate(self.w_initializer, self.input_nodes, self.nodes)
 		self.biais   = generate(self.b_initializer, self.nodes, for_weights=False)
-		
 
 	def output(self, input):
 		return None
