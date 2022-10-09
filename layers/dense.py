@@ -20,9 +20,6 @@ class Dense:
 		print(f"{self.nodes}\t {parameters}\t {self.activation}\t {self.name}")
 
 	def initialize(self):
-		fan_in  = self.input_nodes
-		fan_out = self.nodes
-
 		if self.w_initializer not in initializers_name:
 			raise ValueError(f"initializer '{self.w_initializer}' does't exist.")
 		if self.b_initializer not in initializers_name:
