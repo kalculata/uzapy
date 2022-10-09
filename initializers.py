@@ -2,21 +2,6 @@ import numpy as np
 from math import sqrt
 
 
-alias = [
-  'zeros',
-  'ones',
-  'standard_distribution',
-  'uniform_distribution',
-  'xavier_normal',
-  'glorat_normal',
-  'xavier_uniform',
-  'glorat_uniform',
-  'he_normal',
-  'he_uniform',
-  'lecun_normal',
-  'lecun_uniform',
-]
-
 def generate(initializer, fan_in, fan_out=1, for_weights=True):
   if not for_weights:
     fan_out = fan_in
@@ -46,36 +31,51 @@ def zeros(fan_in, fan_out):
   return np.zeros((fan_out, fan_in))
 
 def standard_distribution(fan_in, fan_out):
-  return np.random.normal(loc=0, scale=1, size=(fan_in, fan_out))
+  return np.random.normal(loc=0, scale=1, size=(fan_out, fan_in))
 
 def uniform_distribution(fan_in, fan_out):
   low  = -1/sqrt(fan_in)
   high =  1/sqrt(fan_in)
-  return np.random.uniform(low=low, high=high, size=(fan_in, fan_out))
+  return np.random.uniform(low=low, high=high, size=(fan_out, fan_in))
 
 def xavier_normal(fan_in, fan_out):
   std = sqrt(2/(fan_in + fan_out))
-  return np.random.normal(loc=0, scale=std, size=(fan_in, fan_out))
+  return np.random.normal(loc=0, scale=std, size=(fan_out, fan_in))
 
 def xavier_uniform(fan_in, fan_out):
   low  = -sqrt(6)/sqrt(fan_in + fan_out)
   high =  sqrt(6)/sqrt(fan_in + fan_out)
-  return np.random.uniform(low=low, high=high, size=(fan_in, fan_out))
+  return np.random.uniform(low=low, high=high, size=(fan_out, fan_in))
 
 def he_normal(fan_in, fan_out):
   std = sqrt(2/fan_in )
-  return np.random.normal(loc=0, scale=std, size=(fan_in, fan_out))
+  return np.random.normal(loc=0, scale=std, size=(fan_out, fan_in))
 
 def he_uniform(fan_in, fan_out):
   low  = -sqrt(6/fan_in)
   high =  sqrt(6/fan_in)
-  return np.random.uniform(low=low, high=high, size=(fan_in, fan_out))
+  return np.random.uniform(low=low, high=high, size=(fan_out, fan_in))
 
 def lecun_normal(fan_in, fan_out):
   std = sqrt(1/fan_in )
-  return np.random.normal(loc=0, scale=std, size=(fan_in, fan_out))
+  return np.random.normal(loc=0, scale=std, size=(fan_out, fan_in))
 
 def lecun_uniform(fan_in, fan_out):
   low  = -sqrt(3/fan_in)
   high =  sqrt(3/fan_in)
-  return np.random.uniform(low=low, high=high, size=(fan_in, fan_out))
+  return np.random.uniform(low=low, high=high, size=(fan_out, fan_in))
+
+alias = [
+  'zeros',
+  'ones',
+  'standard_distribution',
+  'uniform_distribution',
+  'xavier_normal',
+  'glorat_normal',
+  'xavier_uniform',
+  'glorat_uniform',
+  'he_normal',
+  'he_uniform',
+  'lecun_normal',
+  'lecun_uniform',
+]

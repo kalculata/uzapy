@@ -30,5 +30,3 @@ class Dense:
 
 	def output(self, input):
 		return self.weights.dot(input) + self.biais
-
-

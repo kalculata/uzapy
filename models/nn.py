@@ -32,7 +32,8 @@ class NeuralNetwork:
 		self.is_compiled = True
 
 	def train(self, train_data, test_data, epoch=10, batch_size=None, verbose=0):
-		pass
+		x_train, y_train = train_data
+		x_test, y_test = test_data
 
 	def _forward(self, input):
 		for layer in self.layers:
