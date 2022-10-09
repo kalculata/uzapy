@@ -26,8 +26,7 @@ def generate(initializer, fan_in, fan_out=1, for_weights=True):
   elif initializer == 'lecun_normal':
     return lecun_normal(fan_in, fan_out)
   elif initializer == 'lecun_uniform':
-    return lecun_uniform(fan_in, fan_out)
-  
+    return lecun_uniform(fan_in, fan_out) 
 
 def zeros(fan_in, fan_out):
   return np.zeros((fan_out, fan_in))

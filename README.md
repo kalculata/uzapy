@@ -21,7 +21,11 @@ Python machine learning framework
 
 ## TODO
 
-### Algorthms
+- [ ] implement activations functions
+- [ ] implement losses functions
+- [ ] implement sg
+
+### Lake
 
 - [ ] Neural Network
 - [ ] Perception
