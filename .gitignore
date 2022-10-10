@@ -1,6 +1,7 @@
 env/
 *__pycache__/
 *.csv
+*.hdf5
 
 dev.ipynb
 dev.py

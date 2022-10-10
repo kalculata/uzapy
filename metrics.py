@@ -23,7 +23,8 @@ def mae():
   pass
 
 def binary_crossentropy(y_true, y_predicted):
-  pass
+  epsilon = 1e-15
+  return np.sum(-y_true * np.log(y_predicted + epsilon) - (1 - y_true) * np.log(1 - y_predicted + epsilon)).mean()
 
 def categorical_crossentropy(y_true, y_predicted):
   pass
