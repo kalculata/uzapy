@@ -1,3 +1,4 @@
+from activations import ActivationFunction
 from layers.dense import Dense
 
 
@@ -11,6 +12,9 @@ class NeuralNetwork:
 		self.metrics     = None
 
 	def add(self, nodes, activation='relu', name=None, w_initializer='xavier_uniform', b_inititializer='zeros'):
+		if not isinstance(activation, (str, ActivationFunction)) and activation is not None:
+			raise ValueError('Activation function must be str or ActivationFunction instance')
+
 		if (len(self.layers) == 0):
 			self.layers.append(Dense(name, self.input_nodes, nodes, activation, w_initializer, b_inititializer))
 		else:

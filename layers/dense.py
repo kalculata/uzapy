@@ -1,5 +1,5 @@
 from initializers import generate, alias as initializers_name
-from activations import activation, alias as activations_name
+from activations import ActivationFunction, activate, alias as activations_name
 
 
 
@@ -32,6 +32,6 @@ class Dense:
 
 		if self.activation is None:
 			return _output
-		if self.activation not in activations_name:
+		if not isinstance(self.activation, ActivationFunction) and self.activation not in activations_name:
 			raise ValueError(f"activation '{self.activation}' does't exist.")
-		return activation(self.activation, _output)
+		return activate(self.activation, _output)
