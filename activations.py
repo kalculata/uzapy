@@ -10,26 +10,26 @@ def activate(function, x):
     scale = function.scale
     function = function.name
 
+  if alpha is None:
+    if   function == 'leaky_relu':
+      alpha = 0.01
+    elif function == 'elu':
+      alpha = 1.0
+    elif function == 'selu':
+      alpha = 1.67326324
+
+  if scale is None and function == 'selu':
+    scale = 1.05070098
+  
+
   if   function == 'relu':
     return relu(x)
-
   elif function == 'leaky_relu':
-    if alpha is None:
-      alpha = 0.01
     return leaky_relu(x, alpha)
-
   elif function == 'elu':
-    if alpha is None:
-      alpha = 1.0
-    return elu(x)
-
+    return elu(x, alpha)
   elif function == 'selu':
-    if alpha is None:
-      alpha = 1.67326324
-    if scale is None:
-      scale = 1.05070098
     return selu(x, alpha, scale)
-
   elif function == 'sigmoid':
     return sigmoid(x)
   elif function == 'softmax':
