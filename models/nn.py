@@ -10,7 +10,7 @@ class NeuralNetwork:
 		self.loss        = None
 		self.metrics     = None
 
-	def add(self, nodes, activation='leaky_relu', name=None, w_initializer='xavier_uniform', b_inititializer='zeros'):
+	def add(self, nodes, activation='relu', name=None, w_initializer='xavier_uniform', b_inititializer='zeros'):
 		if (len(self.layers) == 0):
 			self.layers.append(Dense(name, self.input_nodes, nodes, activation, w_initializer, b_inititializer))
 		else:

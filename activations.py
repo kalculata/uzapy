@@ -55,10 +55,10 @@ def tanh(x):
 
 alias = [
   'relu',
+  'leaky_relu',
+  'selu',
+  'elu',
   'sigmoid',
   'softmax',
   'tanh',
-  'leaky_relu',
-  'elu',
-  'selu'
 ]
