@@ -10,14 +10,14 @@ Python machine learning framework
 - ones,
 - standard_distribution
 - uniform_distribution
-- xavier_normal
-- glorat_normal
-- xavier_uniform
-- glorat_uniform
+- xavier_normal or glorat_normal
+- xavier_uniform or glorat_uniform
 - he_normal
 - he_uniform
 - lecun_normal
 - lecun_uniform
+
+he initializers are good with ReLU and it variants, LeCun with SELU and Glorat with linear, tanh, softmax, sigmoid.
 
 ### Activations functions
 
