@@ -1,7 +1,6 @@
-from initializers import *
+from initializers import generate, alias as initializers_name
+from activations import activation, alias as activations_name
 
-
-initializers_name = alias
 
 
 class Dense:
@@ -29,4 +28,10 @@ class Dense:
 		self.biais   = generate(self.b_initializer, self.nodes, for_weights=False)
 
 	def output(self, input):
-		return self.weights.dot(input) + self.biais
+		_output = self.weights.dot(input) + self.biais
+
+		if self.activation is None:
+			return _output
+		if self.activation not in activations_name:
+			raise ValueError(f"activation '{self.activation}' does't exist.")
+		return activation(self.activation, _output)

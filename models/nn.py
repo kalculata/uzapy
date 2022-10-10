@@ -10,7 +10,7 @@ class NeuralNetwork:
 		self.loss        = None
 		self.metrics     = None
 
-	def add(self, nodes, activation=None, name=None, w_initializer='xavier_uniform', b_inititializer='zeros'):
+	def add(self, nodes, activation='leaky_relu', name=None, w_initializer='xavier_uniform', b_inititializer='zeros'):
 		if (len(self.layers) == 0):
 			self.layers.append(Dense(name, self.input_nodes, nodes, activation, w_initializer, b_inititializer))
 		else:
@@ -34,6 +34,9 @@ class NeuralNetwork:
 	def train(self, train_data, test_data, epoch=10, batch_size=None, verbose=0):
 		x_train, y_train = train_data
 		x_test, y_test = test_data
+
+		for _epoch in range(epoch):
+			pass
 
 	def _forward(self, input):
 		for layer in self.layers:
