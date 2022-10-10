@@ -67,7 +67,7 @@ he initializers are good with ReLU and it variants, LeCun with SELU and Glorat w
 
 ## TODO
 
-- [ ] implement activations functions
+- [x] implement activations functions
 - [ ] implement losses functions
 - [ ] implement sg
 

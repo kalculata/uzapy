@@ -1,15 +1,14 @@
 from activations import ActivationFunction
 from layers.dense import Dense
+from optimezers import Optimezer
 
 
-class NeuralNetwork:
+class NeuralNetwork(Optimezer):
 	def __init__(self, input_nodes):
+		super().__init__()
+
 		self.input_nodes = input_nodes
-		self.layers      = []
 		self.is_compiled = False
-		self.optimezer   = None
-		self.loss        = None
-		self.metrics     = None
 
 	def add(self, nodes, activation='relu', name=None, w_initializer='xavier_uniform', b_inititializer='zeros'):
 		if not isinstance(activation, (str, ActivationFunction)) and activation is not None:
@@ -36,20 +35,8 @@ class NeuralNetwork:
 		self.is_compiled = True
 
 	def train(self, train_data, test_data, epoch=10, batch_size=None, verbose=0):
-		x_train, y_train = train_data
-		x_test, y_test = test_data
-
 		for _epoch in range(epoch):
-			pass
-
-	def _forward(self, input):
-		for layer in self.layers:
-			output = layer.output(input)
-			input  = output
-		return output
-
-	def _backward(self):
-		pass
+			self.optimeze(_epoch, train_data, test_data, batch_size)
 
 	def predict(self, input):
-		return self.forward(input)
+		return self.forward(input, self.layers)

@@ -10,6 +10,7 @@ def activate(function, x):
     scale = function.scale
     function = function.name
 
+
   if alpha is None:
     if   function == 'leaky_relu':
       alpha = 0.01
@@ -32,10 +33,10 @@ def activate(function, x):
     return selu(x, alpha, scale)
   elif function == 'sigmoid':
     return sigmoid(x)
-  elif function == 'softmax':
-    return softmax(x)
   elif function == 'tanh':
     return tanh(x)
+  elif function == 'softmax':
+    return softmax(x)
   
 def relu(x):
   return np.maximum(0, x)
