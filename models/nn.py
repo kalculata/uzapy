@@ -63,5 +63,13 @@ class NeuralNetwork(Optimezer):
 			plt.legend(loc="upper right")
 		elif lloc == 'down':
 			plt.legend(loc="lower right")
-			
+
 		plt.show()
+
+	def performance(self):
+		print('train cost: ', self.history['train_cost'][-1])
+		print('test cost: ', self.history['test_cost'][-1])
+
+		for metric in self.metrics:
+			print(f'train {metric}: ', self.history['train_' + metric][-1])
+			print(f'test {metric}: ', self.history['test_' + metric][-1])

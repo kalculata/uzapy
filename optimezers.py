@@ -16,8 +16,13 @@ class Optimezer:
     if self.optimezer not in alias:
       raise ValueError(f"optimezer '{self.optimezer}' does'nt exist")
 
+    x_train, y_train = train_data
+    x_test, y_test   = test_data
+
     if self.optimezer == 'gd':
-      return self.gd(train_data, test_data)
+      return self.gd(x_train, y_train, x_test, y_test)
+    if self.optimezer == 'sgd':
+      return self.sgd(x_train, y_train, x_test, y_test)
 
   def forward(self, input):
     activations = {'A0': input}
@@ -47,10 +52,7 @@ class Optimezer:
       self.layers[c].weights = self.layers[c].weights - self.lr * gradients['dW' + str(c+1)]
       self.layers[c].biais   = self.layers[c].biais   - self.lr * gradients['db' + str(c+1)]
 
-  def gd(self, train_data, test_data):
-    x_train, y_train = train_data
-    x_test, y_test   = test_data
-
+  def gd(self, x_train, y_train, x_test, y_test):
     train_activations      = self.forward(x_train)
     test_activations       = self.forward(x_test)
 
@@ -66,8 +68,11 @@ class Optimezer:
 
     self.backward(train_activations, y_train)
     
-  def sgd():
-    pass
+  def sgd(self, x_train, y_train, x_test, y_test):
+    from sklearn.utils import shuffle
+
+    x_train, y_train = shuffle(x_train, y_train)
+      
 
   def sgd_momentum():
     pass
@@ -91,13 +96,6 @@ class Optimezer:
     pass
 
   def ftrl():
-    pass
-
-
-  
-
-  def update_parameters(cost):
-
     pass
 
 alias = [

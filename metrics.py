@@ -35,6 +35,11 @@ def sparse_categorical_crossentropy(y_true, y_predicted):
   pass
 
 def binary_accuracy(y_true, y_predicted, t_rate=0.5):
+  import tensorflow as tf
+  m = tf.keras.metrics.BinaryAccuracy()
+  m.update_state(y_true, y_predicted)
+  
+  return m.result().numpy()
   FP = 0
   FN = 0
   TP = 0
@@ -56,6 +61,8 @@ def binary_accuracy(y_true, y_predicted, t_rate=0.5):
         FN += 1
 
   return (TP + TN) / (TP + TN + FP + FN)
+
+
 
 alias = [
   'mse',
