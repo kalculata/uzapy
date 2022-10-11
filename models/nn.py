@@ -1,3 +1,4 @@
+from tqdm import tqdm
 from activations import ActivationFunction
 from layers.dense import Dense
 from optimezers import Optimezer
@@ -37,14 +38,14 @@ class NeuralNetwork(Optimezer):
 	def train(self, train_data, test_data, lr=0.01, epoch=10, batch_size=None, verbose=0):
 		self.lr = lr
 		
-		for _epoch in range(epoch):
+		for _epoch in tqdm(range(epoch)):
 			self.optimeze(_epoch, train_data, test_data, batch_size)
 
 			if(verbose == 1):
-				print(f'Epoch #{epoch + 1}: accuracy={self.cost[-1]}')
+				print(f'Epoch #{_epoch + 1}: loss={self.cost[-1]}')
 		
 		if verbose == 0:
-			print(f'Epoch #{epoch + 1}: accuracy={self.cost[-1]}')
+			print(f'Epoch #{epoch}: loss={self.cost[-1]}')
 		
 	def predict(self, input):
 		return self.forward(input)['A' + str(len(self.layers))]
