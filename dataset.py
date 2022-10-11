@@ -13,7 +13,13 @@ class ImageDataset:
     for i in range(10):
       idx = randrange(0, self.X.shape[0])
       plt.subplot(4, 5, i+1)
-      plt.imshow(self.y[idx], cmap='gray')
-      plt.title(y[idx])
+      plt.imshow(self.X[idx], cmap='gray')
+      plt.title(self.y[idx])
       plt.tight_layout()
+    plt.show()
+  
+  def show(self, idx):
+    # fig = plt.figure(figsize=(16, 10))
+    plt.imshow(self.X[idx], cmap='gray')
+    plt.title(self.y[idx])
     plt.show()
