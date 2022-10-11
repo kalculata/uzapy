@@ -35,17 +35,17 @@ class NeuralNetwork(Optimezer):
 
 		self.is_compiled = True
 
-	def train(self, train_data, test_data, lr=0.01, epoch=10, batch_size=None, verbose=0):
-		self.lr = lr
+	def train(self, train_data, test_data=None, lr=0.01, epoch=10, batch_size=None, verbose=0, test_metrics=False):
+		self.lr           = lr
+		self.test_metrics = test_metrics
 		
-		for _epoch in tqdm(range(epoch)):
-			self.optimeze(_epoch, train_data, test_data, batch_size)
-
-			if(verbose == 1):
-				print(f'Epoch #{_epoch + 1}: loss={self.cost[-1]}')
-		
-		if verbose == 0:
-			print(f'Epoch #{epoch}: loss={self.cost[-1]}')
+		if verbose == 1:
+			for _epoch in range(epoch):
+				self.optimeze(train_data, test_data, batch_size)
+				print(f'Epoch #{_epoch + 1}: loss={self.history["train_cost"][-1]}')	
+		else:
+			for _epoch in tqdm(range(epoch)):
+				self.optimeze(train_data, test_data, batch_size)
 		
 	def predict(self, input):
 		return self.forward(input)['A' + str(len(self.layers))]

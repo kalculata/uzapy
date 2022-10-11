@@ -5,12 +5,20 @@ from metrics import cost
 
 class Optimezer:
   def __init__(self):
-    self.layers = []
-    self.optimezer = None
-    self.loss = None
-    self.metrics = None
-    self.lr = 0.01
-    self.cost = []
+    self.layers       = []
+    self.history      = {'train_cost': []}
+    self.optimezer    = None
+    self.loss         = None
+    self.metrics      = None
+    self.test_metrics = False
+    self.lr           = 0.01
+
+  def optimeze(self, train_data, test_data, batch_size):
+    if self.optimezer not in alias:
+      raise ValueError(f"optimezer '{self.optimezer}' does'nt exist")
+
+    if self.optimezer == 'gd':
+      return self.gd(train_data, test_data)
 
   def forward(self, input):
     activations = {'A0': input}
@@ -21,34 +29,31 @@ class Optimezer:
 
     return activations
 
-  def optimeze(self, epoch, train_data, test_data, batch_size):
-    if self.optimezer not in alias:
-      raise ValueError(f"optimezer '{self.optimezer}' does'nt exist")
-
-    if self.optimezer == 'gd':
-      return self.gd(train_data, test_data)
-
-  def gd(self, train_data, test_data):
-    x_train, y_train = train_data
-    activations = self.forward(x_train)
-
-    m = y_train.shape[1]
-    C = len(self.layers)
-    self.cost.append(cost(self.loss, y_train, activations['A' + str(C)]))
-
-    dZ = activations['A' + str(C)] - y_train
+  def backward(self, activations, y_train):
     gradients = {}
+    C         = len(self.layers)
+    dZ        = activations['A' + str(C)] - y_train
+    m         = y_train.shape[1]
 
     for c in reversed(range(1, C+1)):
       gradients['dW' + str(c)] = 1/m * np.dot(dZ, activations['A' + str(c-1)].T)
       gradients['db' + str(c)] = 1/m * np.sum(dZ, axis=1, keepdims=True)
-      
       if c > 1:
         dZ = np.dot(self.layers[c-1].weights.T, dZ) * activations['A' + str(c-1)] * (1 - activations['A' + str(c-1)])
 
-    for c in range(C):
+    self.update(gradients)
+
+  def update(self, gradients): 
+    for c in range(len(self.layers)):
       self.layers[c].weights = self.layers[c].weights - self.lr * gradients['dW' + str(c+1)]
-      self.layers[c].biais = self.layers[c].biais - self.lr * gradients['db' + str(c+1)]
+      self.layers[c].biais   = self.layers[c].biais   - self.lr * gradients['db' + str(c+1)]
+
+  def gd(self, train_data, test_data):
+    x_train, y_train = train_data
+    activations      = self.forward(x_train)
+
+    self.history['train_cost'].append(cost(self.loss, y_train, activations['A' + str(len(self.layers))]))
+    self.backward(activations, y_train)
     
   def sgd():
     pass

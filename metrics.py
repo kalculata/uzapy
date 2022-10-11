@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def cost(loss, y_true, y_predicted):
+def cost(loss, y_true, y_predicted, t_rate=0.5):
   if loss not in alias:
     raise ValueError(f"loss '{loss}' doesn't exist.")
 
@@ -15,6 +15,8 @@ def cost(loss, y_true, y_predicted):
     return categorical_crossentropy(y_true, y_predicted)
   elif loss == 'binary_crossentropy':
     return sparse_categorical_crossentropy(y_true, y_predicted)
+  elif loss == 'accaracy':
+    return accuracy(y_true, y_predicted, t_rate)
 
 def mse(y_true, y_predicted):
   return 1 / y_true.shape[1] * np.square(y_true - y_predicted)
@@ -32,10 +34,14 @@ def categorical_crossentropy(y_true, y_predicted):
 def sparse_categorical_crossentropy(y_true, y_predicted):
   pass
 
+def accuracy(y_true, y_predicted, t_rate=0.5):
+  pass
+
 alias = [
   'mse',
   'mae',
   'binary_crossentropy',
   'categorical_crossentropy',
   'sparse_categorical_crossentropy',
+  'accuracy'
 ]
