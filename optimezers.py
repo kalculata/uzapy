@@ -6,11 +6,10 @@ from metrics import cost
 class Optimezer:
   def __init__(self):
     self.layers       = []
-    self.history      = {'train_cost': []}
+    self.metrics      = []
+    self.history      = {'train_cost': [], 'test_cost': []}
     self.optimezer    = None
-    self.loss         = None
-    self.metrics      = None
-    self.test_metrics = False
+    self.loss_func    = None
     self.lr           = 0.01
 
   def optimeze(self, train_data, test_data, batch_size):
@@ -50,10 +49,22 @@ class Optimezer:
 
   def gd(self, train_data, test_data):
     x_train, y_train = train_data
-    activations      = self.forward(x_train)
+    x_test, y_test   = test_data
 
-    self.history['train_cost'].append(cost(self.loss, y_train, activations['A' + str(len(self.layers))]))
-    self.backward(activations, y_train)
+    train_activations      = self.forward(x_train)
+    test_activations       = self.forward(x_test)
+
+    train_y_predicted      = train_activations['A' + str(len(self.layers))]
+    test_y_predicted       = test_activations[ 'A' + str(len(self.layers))]
+
+    self.history['train_cost'].append(cost(self.loss_func, y_train, train_y_predicted))
+    self.history['test_cost' ].append(cost(self.loss_func, y_test,  test_y_predicted))
+
+    for metric in self.metrics:
+      self.history['train_' + metric].append(cost(metric, y_train, train_y_predicted))
+      self.history['test_'  + metric].append(cost(metric, y_test,   test_y_predicted))
+
+    self.backward(train_activations, y_train)
     
   def sgd():
     pass

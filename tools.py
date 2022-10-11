@@ -23,3 +23,4 @@ class ImageDataset:
     plt.imshow(self.X[idx], cmap='gray')
     plt.title(self.y[idx])
     plt.show()
+

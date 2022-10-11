@@ -9,14 +9,14 @@ def cost(loss, y_true, y_predicted, t_rate=0.5):
     return mse(y_true, y_predicted)
   elif loss == 'mae':
     return mae(y_true, y_predicted)
-  elif loss == 'binary_crossentropy':
+  elif loss in ['binary_crossentropy', 'log_loss']:
     return binary_crossentropy(y_true, y_predicted)
   elif loss == 'binary_crossentropy':
     return categorical_crossentropy(y_true, y_predicted)
   elif loss == 'binary_crossentropy':
     return sparse_categorical_crossentropy(y_true, y_predicted)
-  elif loss == 'accaracy':
-    return accuracy(y_true, y_predicted, t_rate)
+  elif loss == 'binary_accuracy':
+    return binary_accuracy(y_true, y_predicted, t_rate)
 
 def mse(y_true, y_predicted):
   return 1 / y_true.shape[1] * np.square(y_true - y_predicted)
@@ -34,14 +34,34 @@ def categorical_crossentropy(y_true, y_predicted):
 def sparse_categorical_crossentropy(y_true, y_predicted):
   pass
 
-def accuracy(y_true, y_predicted, t_rate=0.5):
-  pass
+def binary_accuracy(y_true, y_predicted, t_rate=0.5):
+  FP = 0
+  FN = 0
+  TP = 0
+  TN = 0
+
+  for i in range(y_true.shape[1]):
+    y_pred = 0 if y_predicted[0][i] < t_rate else 1
+    # False
+    if y_true[0][i] == 0:
+      if y_pred == 0:
+        FP += 1
+      else:
+        FN += 1
+    # True
+    elif y_true[0][i] == 1:
+      if y_pred == 1:
+        TP += 1
+      else:
+        FN += 1
+
+  return (TP + TN) / (TP + TN + FP + FN)
 
 alias = [
   'mse',
   'mae',
-  'binary_crossentropy',
+  'binary_crossentropy', 'log_loss',
   'categorical_crossentropy',
   'sparse_categorical_crossentropy',
-  'accuracy'
+  'binary_accuracy'
 ]
