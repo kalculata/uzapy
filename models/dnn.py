@@ -59,7 +59,7 @@ class DNN(Optimezer):
 		return self.forward(input)['A' + str(len(self.layers))]
 	
 	def plot_history(self, metric, lloc='up'):
-		plt.plot(self.history['train_' + metric], label='train' + metric)
+		plt.plot(self.history['train_' + metric], label='train ' + metric)
 		plt.plot(self.history['test_'  + metric], label="test " + metric)
 
 		if lloc == 'up':
@@ -70,9 +70,9 @@ class DNN(Optimezer):
 		plt.show()
 
 	def performance(self):
-		print('train cost: ', self.history['train_cost'][-1])
-		print('test  cost: ', self.history[ 'test_cost'][-1])
+		print('train cost: ', round(self.history['train_cost'][-1], 2))
+		print('test  cost: ', round(self.history[ 'test_cost'][-1], 2))
 
 		for metric in self.metrics:
-			print(f'train_{metric}: ', self.history['train_' + metric][-1])
-			print(f'test_{metric}: ',  self.history['test_'  + metric][-1])
+			print(f'train {metric}: ', round(self.history['train_' + metric][-1], 2))
+			print(f'test {metric} : ',  round(self.history['test_'  + metric][-1], 2))

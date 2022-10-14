@@ -55,7 +55,7 @@ class Optimezer:
 
   def gd(self):
     x_train, y_train = self.train_data
-    x_test, y_test   = self.train_data
+    x_test, y_test   = self.test_data
 
     train_activations      = self.forward(x_train)
     test_activations       = self.forward(x_test)
@@ -67,7 +67,7 @@ class Optimezer:
     self.history[ 'test_cost'].append(cost(self.loss_func, y_test, test_y_pred))
 
     for metric in self.metrics:
-      if metric not in self.history.keys():
+      if 'train_' + metric not in self.history.keys():
         self.history['train_' + metric] = []
         self.history['test_'  + metric] = []
       self.history['train_' + metric].append(cost(metric, y_train, train_y_pred))
