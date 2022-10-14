@@ -43,21 +43,24 @@ class DNN(Optimezer):
 
 	def train(self, train_data, test_data=None, lr=0.01, epoch=10, batch_size=None, verbose=0):
 		self.lr = lr
+		self.train_data = train_data
+		self.test_data  = test_data
+		self.batch_size = batch_size
 		
 		if verbose == 1:
 			for _epoch in range(epoch):
-				self.optimeze(train_data, test_data, batch_size)
+				self.optimeze()
 				print(f'Epoch #{_epoch + 1}: loss={self.history["train_cost"][_epoch]}')	
 		else:
 			for _epoch in tqdm(range(epoch)):
-				self.optimeze(train_data, test_data, batch_size)
+				self.optimeze()
 		
 	def predict(self, input):
 		return self.forward(input)['A' + str(len(self.layers))]
 	
 	def plot_history(self, metric, lloc='up'):
-		plt.plot(self.history['train_' + metric], label="train "+ metric)
-		# plt.plot(self.history['test_'  + metric], label="test " + metric)
+		plt.plot(self.history['train_' + metric], label='train' + metric)
+		plt.plot(self.history['test_'  + metric], label="test " + metric)
 
 		if lloc == 'up':
 			plt.legend(loc="upper right")
@@ -68,8 +71,8 @@ class DNN(Optimezer):
 
 	def performance(self):
 		print('train cost: ', self.history['train_cost'][-1])
-		# print('test cost: ', self.history['test_cost'][-1])
+		print('test  cost: ', self.history[ 'test_cost'][-1])
 
 		for metric in self.metrics:
-			print(f'train {metric}: ', self.history['train_' + metric][-1])
-			# print(f'test {metric}: ', self.history['test_' + metric][-1])
+			print(f'train_{metric}: ', self.history['train_' + metric][-1])
+			print(f'test_{metric}: ',  self.history['test_'  + metric][-1])

@@ -4,6 +4,10 @@ Python machine learning framework
 
 ## Features
 
+### Optimezers
+
+- gd (Gradient Descent)
+
 ### Weights initializers
 
 - zeros
@@ -64,6 +68,12 @@ he initializers are good with ReLU and it variants, LeCun with SELU and Glorat w
     - computationally expensive
 
 - softmax
+
+### Metrics
+
+- mse (Mean Squared Error)
+- Binary crossentropy / log loss
+- Binary accuracy
 
 ## TODO
 
