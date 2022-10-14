@@ -6,7 +6,7 @@ from layers.dense import Dense
 from optimezers import Optimezer
 
 
-class NeuralNetwork(Optimezer):
+class DNN(Optimezer):
 	def __init__(self, input_nodes):
 		super().__init__()
 
@@ -57,7 +57,7 @@ class NeuralNetwork(Optimezer):
 	
 	def plot_history(self, metric, lloc='up'):
 		plt.plot(self.history['train_' + metric], label="train "+ metric)
-		plt.plot(self.history['test_'  + metric], label="test " + metric)
+		# plt.plot(self.history['test_'  + metric], label="test " + metric)
 
 		if lloc == 'up':
 			plt.legend(loc="upper right")
@@ -68,8 +68,8 @@ class NeuralNetwork(Optimezer):
 
 	def performance(self):
 		print('train cost: ', self.history['train_cost'][-1])
-		print('test cost: ', self.history['test_cost'][-1])
+		# print('test cost: ', self.history['test_cost'][-1])
 
 		for metric in self.metrics:
 			print(f'train {metric}: ', self.history['train_' + metric][-1])
-			print(f'test {metric}: ', self.history['test_' + metric][-1])
+			# print(f'test {metric}: ', self.history['test_' + metric][-1])

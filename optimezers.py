@@ -1,13 +1,13 @@
 import numpy as np
 
-from metrics import cost
+from metrics import binary_accuracy_tf, cost
 
 
 class Optimezer:
   def __init__(self):
     self.layers       = []
     self.metrics      = []
-    self.history      = {'train_cost': [], 'test_cost': []}
+    self.history      = {'train_cost': [], 'test_cost': [], 'tf': []}
     self.optimezer    = None
     self.loss_func    = None
     self.lr           = 0.01
@@ -60,11 +60,10 @@ class Optimezer:
     test_y_predicted       = test_activations[ 'A' + str(len(self.layers))]
 
     self.history['train_cost'].append(cost(self.loss_func, y_train, train_y_predicted))
-    self.history['test_cost' ].append(cost(self.loss_func, y_test,  test_y_predicted))
+    self.history['tf'].append(binary_accuracy_tf(y_train, train_y_predicted))
 
     for metric in self.metrics:
       self.history['train_' + metric].append(cost(metric, y_train, train_y_predicted))
-      self.history['test_'  + metric].append(cost(metric, y_test,   test_y_predicted))
 
     self.backward(train_activations, y_train)
     
