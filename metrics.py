@@ -11,7 +11,7 @@ def cost(loss, y_true, y_pred, t_rate=0.5):
     return mae(y_true, y_pred)
   elif loss in ['binary_crossentropy', 'log_loss']:
     return binary_crossentropy(y_true, y_pred)
-  elif loss == 'binary_crossentropy':
+  elif loss == 'categorical_crossentropy':
     return categorical_crossentropy(y_true, y_pred)
   elif loss == 'binary_crossentropy':
     return sparse_categorical_crossentropy(y_true, y_pred)
@@ -42,6 +42,13 @@ def binary_accuracy(y_true, y_pred, threshold=0.5):
     y_pred_map[0][i] = pred_map(y_pred[0][i])
 
   return sum(y_pred_map[0] == y_true[0]) / len(y_pred_map[0])
+
+def categorical_accuracy(y_true, y_pred):
+  maxpos = lambda x: np.argmax(x)
+  y_true_max = np.array([maxpos(rec) for rec in y_true])
+  y_pred_max = np.array([maxpos(rec) for rec in y_pred])
+
+  return sum(y_true_max == y_pred_max) / len(y_true_max)
 
 alias = [
   'mse',

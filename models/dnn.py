@@ -32,10 +32,6 @@ class DNN(Optimezer):
 		self.optimezer = optimizer
 		self.metrics   = metrics
 
-		for metric in self.metrics:
-			self.history['train_' + metric] = []
-			self.history['test_'  + metric] = []
-
 		for layer in self.layers:
 			layer.initialize()
 
