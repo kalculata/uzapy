@@ -50,10 +50,16 @@ def sigmoid(x):
   return 1.0/(1+np.exp(-x))
 def tanh(x):
   return (np.exp(x) - np.exp(-x)) / (np.exp(x) + np.exp(-x))
-def softmax(x):
-  e_x = np.exp(x - np.max(x))
-  return e_x / e_x.sum(axis=0)
 
+def softmax(x):
+  res = []
+  x = x.T
+
+  for row in x:
+    e_x = np.exp(row - np.max(row))
+    res.append(e_x / e_x.sum())
+
+  return np.array(res).T
 
 class ActivationFunction:
   def __init__(self, name, alpha, scale=None):

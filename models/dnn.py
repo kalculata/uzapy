@@ -37,13 +37,13 @@ class DNN(Optimezer):
 
 		self.is_compiled = True
 
-	def train(self, train_data, test_data=None, lr=0.01, epoch=10, batch_size=None, verbose=0):
+	def train(self, train_data, test_data=None, lr=0.01, epoch=10, batch_size=None, verbose=False):
 		self.lr = lr
 		self.train_data = train_data
 		self.test_data  = test_data
 		self.batch_size = batch_size
 		
-		if verbose == 1:
+		if verbose == True:
 			for _epoch in range(epoch):
 				self.optimeze()
 				print(f'Epoch #{_epoch + 1}: loss={self.history["train_cost"][_epoch]}')	

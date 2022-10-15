@@ -16,7 +16,6 @@ class Optimezer:
     self.batch_size   = None
 
   def optimeze(self):
-
     if self.optimezer not in alias:
       raise ValueError(f"optimezer '{self.optimezer}' does'nt exist")
 
@@ -40,7 +39,7 @@ class Optimezer:
     dZ        = activations['A' + str(C)] - y_train
     m         = y_train.shape[1]
 
-    for c in reversed(range(1, C+1)):
+    for c in reversed(range(1, C+1)): 
       gradients['dW' + str(c)] = 1/m * np.dot(dZ, activations['A' + str(c-1)].T)
       gradients['db' + str(c)] = 1/m * np.sum(dZ, axis=1, keepdims=True)
       if c > 1:
@@ -62,6 +61,9 @@ class Optimezer:
 
     train_y_pred           = train_activations['A' + str(len(self.layers))]
     test_y_pred            = test_activations[ 'A' + str(len(self.layers))]
+
+    train_y_pred = train_y_pred.reshape(1, 10, -1)
+    test_y_pred  = test_y_pred.reshape(1, 10, -1)
 
     self.history['train_cost'].append(cost(self.loss_func, y_train, train_y_pred))
     self.history[ 'test_cost'].append(cost(self.loss_func, y_test, test_y_pred))
