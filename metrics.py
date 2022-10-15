@@ -29,7 +29,7 @@ def binary_crossentropy(y_true, y_pred):
   return 1 / y_true.shape[1] * np.sum(-y_true * np.log(y_pred + epsilon) - (1 - y_true) * np.log(1 - y_pred + epsilon))
 
 def categorical_crossentropy(y_true, y_pred):
-  pass
+  return -np.sum(y_true * np.log(y_pred + 10 **-100)) / y_true.shape[0]
 
 def sparse_categorical_crossentropy(y_true, y_pred):
   pass
