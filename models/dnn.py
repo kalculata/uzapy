@@ -66,9 +66,6 @@ class DNN(Optimezer):
 		plt.show()
 
 	def performance(self):
-		print('train cost: ', round(self.history['train_cost'][-1], 2))
-		print('test  cost: ', round(self.history[ 'test_cost'][-1], 2))
-
 		for metric in self.metrics:
 			print(f'train {metric}: ', round(self.history['train_' + metric][-1], 2))
-			print(f'test {metric} : ',  round(self.history['test_'  + metric][-1], 2))
+			print(f'test  {metric} : ',  round(self.history['test_'  + metric][-1], 2))

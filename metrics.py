@@ -20,11 +20,14 @@ def binary_accuracy(y_true, y_pred, threshold=0.5):
   return sum(y_pred_map[0] == y_true[0]) / len(y_pred_map[0])
 
 def categorical_accuracy(y_true, y_pred):
+  y_pred = y_pred.T
+  y_true = y_true.T
+
   maxpos = lambda x: np.argmax(x)
   y_true_max = np.array([maxpos(rec) for rec in y_true])
   y_pred_max = np.array([maxpos(rec) for rec in y_pred])
 
-  return sum(y_true_max == y_pred_max) / len(y_true_max)
+  return np.sum(y_true_max == y_pred_max) / y_true_max.shape[0]
 
 alias = [
   'binary_accuracy',

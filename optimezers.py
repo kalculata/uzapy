@@ -1,6 +1,7 @@
 import numpy as np
 
-from metrics import cost
+from losses import cost
+from metrics import metrics
 
 
 class Optimezer:
@@ -62,9 +63,6 @@ class Optimezer:
     train_y_pred           = train_activations['A' + str(len(self.layers))]
     test_y_pred            = test_activations[ 'A' + str(len(self.layers))]
 
-    train_y_pred = train_y_pred.reshape(1, 10, -1)
-    test_y_pred  = test_y_pred.reshape(1, 10, -1)
-
     self.history['train_cost'].append(cost(self.loss_func, y_train, train_y_pred))
     self.history[ 'test_cost'].append(cost(self.loss_func, y_test, test_y_pred))
 
@@ -72,8 +70,8 @@ class Optimezer:
       if 'train_' + metric not in self.history.keys():
         self.history['train_' + metric] = []
         self.history['test_'  + metric] = []
-      self.history['train_' + metric].append(cost(metric, y_train, train_y_pred))
-      self.history['test_'  + metric].append(cost(metric, y_train,  test_y_pred))
+      self.history['train_' + metric].append(metrics(metric, y_train, train_y_pred))
+      self.history['test_'  + metric].append(metrics(metric, y_test,  test_y_pred))
 
     self.backward(train_activations, y_train)
     

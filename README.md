@@ -69,11 +69,16 @@ he initializers are good with ReLU and it variants, LeCun with SELU and Glorat w
 
 - softmax
 
-### Metrics
+### Losses
 
 - mse (Mean Squared Error)
 - Binary crossentropy / log loss
+- Categorical crossentropy
+
+### Metrics
+
 - Binary accuracy
+- Categorical accuracy
 
 ## TODO
 
