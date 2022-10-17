@@ -1,6 +1,6 @@
 # Uzapy
 
-Python machine learning framework
+Uzapy is Python deep learning framework.
 
 ## Features
 
@@ -81,12 +81,6 @@ he initializers are good with ReLU and it variants, LeCun with SELU and Glorat w
 - Categorical accuracy
 
 ## TODO
-
-- [x] implement activations functions
-- [ ] implement losses functions
-- [ ] implement sg
-
-### Lake
 
 - [ ] Neural Network
 - [ ] Perception

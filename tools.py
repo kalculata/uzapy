@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 
 from random import randrange
 
@@ -24,4 +25,14 @@ class ImageDataset:
     plt.imshow(self.X[idx], cmap='gray')
     plt.title(self.y[idx])
     plt.show()
+
+def compute_iterations(n, batch_size):
+  if batch_size >= n:
+    raise ValueError('batch size must be less than n.')
+  
+  return n // batch_size if (n % batch_size == 0) else (n // batch_size) + 1
+
+def shuffle(x_train, y_train, axis=1):
+  indices = np.random.permutation(x_train.shape[1])
+  return (np.take(x_train, indices, axis=axis)), (np.take(y_train, indices, axis=axis)) 
 

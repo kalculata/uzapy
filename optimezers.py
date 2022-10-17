@@ -1,13 +1,13 @@
 import numpy as np
-
-from losses import cost
-from metrics import metrics
+from tools import compute_iterations, shuffle
 
 
 class Optimezer:
   def __init__(self):
-    self.train_data   = None
-    self.test_data    = None
+    self.x_train      = None
+    self.y_train      = None
+    self.x_test       = None
+    self.y_test       = None
     self.layers       = []
     self.metrics      = []
     self.history      = {'train_cost': [], 'test_cost': []}
@@ -19,11 +19,16 @@ class Optimezer:
   def optimeze(self):
     if self.optimezer not in alias:
       raise ValueError(f"optimezer '{self.optimezer}' does'nt exist")
+    if self.batch_size is None and self.optimezer != 'gd':
+      raise ValueError('batch size is None')
+    
+    if self.shuffle and self.optimezer != 'gd':
+      self.x_train, self.y_train = shuffle(self.x_train, self.y_train)
 
     if self.optimezer == 'gd':
-      return self.gd()
+      self.gd(self.x_train, self.y_train)
     if self.optimezer == 'sgd':
-      return self.sgd()
+      self.sgd()
 
   def forward(self, input):
     activations = {'A0': input}
@@ -53,32 +58,26 @@ class Optimezer:
       self.layers[c].weights = self.layers[c].weights - self.lr * gradients['dW' + str(c+1)]
       self.layers[c].biais   = self.layers[c].biais   - self.lr * gradients['db' + str(c+1)]
 
-  def gd(self):
-    x_train, y_train = self.train_data
-    x_test, y_test   = self.test_data
-
+  def gd(self, x_train, y_train):
     train_activations      = self.forward(x_train)
-    test_activations       = self.forward(x_test)
-
-    train_y_pred           = train_activations['A' + str(len(self.layers))]
-    test_y_pred            = test_activations[ 'A' + str(len(self.layers))]
-
-    self.history['train_cost'].append(cost(self.loss_func, y_train, train_y_pred))
-    self.history[ 'test_cost'].append(cost(self.loss_func, y_test, test_y_pred))
-
-    for metric in self.metrics:
-      if 'train_' + metric not in self.history.keys():
-        self.history['train_' + metric] = []
-        self.history['test_'  + metric] = []
-      self.history['train_' + metric].append(metrics(metric, y_train, train_y_pred))
-      self.history['test_'  + metric].append(metrics(metric, y_test,  test_y_pred))
-
     self.backward(train_activations, y_train)
     
   def sgd(self):
-    pass
-      
+    n             = self.x_train.shape[1]
+    iterations    = compute_iterations(n, self.batch_size)
+    itr_start_idx = 0
+    itr_end_idx   = self.batch_size
 
+    for itr in range(1, iterations+1):
+      x_train = self.x_train[:, itr_start_idx:itr_end_idx]
+      y_train = self.y_train[:, itr_start_idx:itr_end_idx]
+
+      self.gd(x_train, y_train)
+
+      if itr != iterations:
+        itr_start_idx = itr_end_idx
+        itr_end_idx   = itr_end_idx + self.batch_size if (itr_end_idx + self.batch_size < n) else n
+    
   def sgd_momentum():
     pass
 
