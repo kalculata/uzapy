@@ -36,3 +36,16 @@ def shuffle(x_train, y_train, axis=1):
   indices = np.random.permutation(x_train.shape[1])
   return (np.take(x_train, indices, axis=axis)), (np.take(y_train, indices, axis=axis)) 
 
+def split_x_y(data, pred_col):
+  x = data.drop(pred_col, axis=1)
+  y = data[pred_col]
+
+  return x, y
+
+def split_train_test(x, y, frac=0.7):
+  x_train = x.sample(frac=frac, axis=0)
+  x_test  = x.drop(x_train.index)
+  y_train = y.sample(frac=frac, axis=0)
+  y_test  = y.drop(x_train.index)
+
+  return x_train, y_train, x_test, y_test

@@ -7,6 +7,7 @@ Uzapy is Python deep learning framework.
 ### Optimezers
 
 - gd (Gradient Descent)
+- sgd (Stochastic Gradient Descent)
 
 ### Weights initializers
 
