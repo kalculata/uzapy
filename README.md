@@ -73,6 +73,7 @@ he initializers are good with ReLU and it variants, LeCun with SELU and Glorat w
 ### Losses
 
 - mse (Mean Squared Error)
+- mae (Mean Absolute Error)
 - Binary crossentropy / log loss
 - Categorical crossentropy
 
@@ -80,6 +81,14 @@ he initializers are good with ReLU and it variants, LeCun with SELU and Glorat w
 
 - Binary accuracy
 - Categorical accuracy
+
+## Notes
+
+### Data normalization
+
+- data = (data - mean) / std
+
+NB: you must use train mean and std to normalize test set and also when you want do prediction.
 
 ## TODO
 

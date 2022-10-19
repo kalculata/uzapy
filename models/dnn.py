@@ -45,13 +45,16 @@ class DNN(Optimezer):
 		self.lr = lr
 		self.batch_size = batch_size
 		self.shuffle = shuffle
+		self.history = {'train_cost': [], 'test_cost': []}
 		
 		if verbose == True:
 			for _epoch in range(epoch):
 				self.optimeze()
 				self.evaluate()
 
-				print(f'Epoch #{_epoch + 1}: loss={round(self.history["train_cost"][_epoch], 2)}{self._display_metrics(_epoch)}')	
+				_train_loss = round(self.history["train_cost"][_epoch], 2)
+				_test_loss  = round(self.history["test_cost"][_epoch], 2)
+				print(f'Epoch #{_epoch + 1}: train loss={_train_loss}, test loss={_test_loss}{self._display_metrics(_epoch)}')	
 		else:
 			for _epoch in tqdm(range(epoch)):
 				self.optimeze()
