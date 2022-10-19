@@ -17,10 +17,10 @@ def cost(loss, y_true, y_pred):
     return sparse_categorical_crossentropy(y_true, y_pred)
 
 def mse(y_true, y_pred):
-  return 1 / y_true.shape[1] * np.square(y_true - y_pred)
+  return 1 / y_true.shape[1] * np.sum(np.square(y_true - y_pred))
 
-def mae():
-  pass
+def mae(y_true, y_pred):
+  return 1 / y_true.shape[1] * np.sum(np.absolute(y_true - y_pred))
 
 def binary_crossentropy(y_true, y_pred):
   epsilon = 1e-15

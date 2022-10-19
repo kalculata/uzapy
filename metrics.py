@@ -1,14 +1,18 @@
 import numpy as np
 
+from losses import cost, alias as losses_alias
+
 
 def metrics(metric, y_true, y_pred, threshold=0.5):
-  if metric not in alias:
+  if metric not in alias and metric not in losses_alias:
     raise ValueError(f"metric '{metric}' doesn't exist.")
 
-  if   metric == 'binary_accuracy':
+  if metric == 'binary_accuracy':
     return binary_accuracy(y_true, y_pred, threshold)
   elif metric == 'categorical_accuracy':
     return categorical_accuracy(y_true, y_pred)
+  else:
+    return cost(metric, y_true, y_pred)
 
 def binary_accuracy(y_true, y_pred, threshold=0.5):
   pred_map = lambda x: 0 if x <= threshold else 1

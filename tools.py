@@ -48,4 +48,10 @@ def split_train_test(x, y, frac=0.7):
   y_train = y.sample(frac=frac, axis=0)
   y_test  = y.drop(x_train.index)
 
-  return x_train, y_train, x_test, y_test
+  return np.array(x_train), np.array(y_train), np.array(x_test), np.array(y_test)
+
+def normalize_data(data):
+  mean = data.mean()
+  std  = data.std()
+
+  return (data - mean) / std

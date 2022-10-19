@@ -50,14 +50,21 @@ class DNN(Optimezer):
 			for _epoch in range(epoch):
 				self.optimeze()
 				self.evaluate()
-				print(f'Epoch #{_epoch + 1}: loss={self.history["train_cost"][_epoch]}')	
+
+				print(f'Epoch #{_epoch + 1}: loss={round(self.history["train_cost"][_epoch], 2)}{self._display_metrics(_epoch)}')	
 		else:
 			for _epoch in tqdm(range(epoch)):
 				self.optimeze()
 				self.evaluate()
-		
-		return self.history
 	
+	def _display_metrics(self, epoch):
+		output = ""
+		for metric in self.metrics:
+			output += ", train_" + metric + "=" + str(round(self.history['train_' + metric][epoch], 2))
+			output += ", test_"  + metric + "=" + str(round(self.history['test_' + metric][epoch], 2))
+
+		return output
+
 	def evaluate(self):
 		test_activations       = self.forward(self.x_test)
 		train_activations      = self.forward(self.x_train)

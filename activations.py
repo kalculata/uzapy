@@ -39,7 +39,8 @@ def activate(function, x):
     return softmax(x)
   
 def relu(x):
-  return np.maximum(0, x)
+  scaling_factor = 0.001
+  return np.maximum(0, x) * scaling_factor
 def leaky_relu(x, alpha=0.01):
   return np.maximum(alpha * x, x)
 def elu(x, alpha=1.0):
