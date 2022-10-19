@@ -6,8 +6,10 @@ Uzapy is Python deep learning framework.
 
 ### Optimezers
 
-- gd (Gradient Descent)
-- sgd (Stochastic Gradient Descent)
+- gd      (Gradient Descent)
+- sgd     (Stochastic Gradient Descent)
+- rmsprop (Root Mean Square Propagation)
+- adam    (Adaptive Moment Estimation)
 
 ### Weights initializers
 

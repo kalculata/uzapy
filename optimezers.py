@@ -22,9 +22,10 @@ class Optimezer:
 
   def optimeze(self):
     if isinstance(self.optimezer, OptimezerClass):
-      self.epislon = self.optimezer.epislon
-      self.beta    = self.optimezer.beta
-      self.beta2   = self.optimezer.beta2
+      self.epislon   = self.optimezer.epislon
+      self.beta      = self.optimezer.beta
+      self.beta2     = self.optimezer.beta2
+      self.optimezer = self.optimezer.name
     elif self.optimezer not in alias:
       raise ValueError(f"optimezer '{self.optimezer}' does'nt exist")
 
@@ -132,7 +133,7 @@ class Optimezer:
   
 
 class OptimezerClass:
-  def __init(self, name, epislon, beta=None, beta2=None):
+  def __init__(self, name, epislon, beta=None, beta2=None):
     self.name    = name
     self.epislon = epislon
     self.beta    = beta
@@ -143,18 +144,18 @@ class OptimezerClass:
 
 
 class SGDMomentum(OptimezerClass):
-  def __init(self, epislon=1e-7, beta=0.9):
-    return super().__init('sgd_momentum', epislon, beta)
+  def __init__(self, epislon=1e-7, beta=0.9):
+    return super().__init__('sgd_momentum', epislon, beta)
 
 
 class RMSProp(OptimezerClass):
-  def __init(self, epislon=1e-7, beta=0.999):
-    return super().__init('rmsprop', epislon, beta2=beta)
+  def __init__(self, epislon=1e-7, beta=0.999):
+    return super().__init__('rmsprop', epislon, beta2=beta)
   
 
 class Adam(OptimezerClass):
-  def __init(self, epislon=1e-7, beta1=0.9, beta2=0.999):
-    return super().__init('adam', epislon, beta1, beta2=beta2)
+  def __init__(self, epislon=1e-7, beta1=0.9, beta2=0.999):
+    return super().__init__('adam', epislon, beta1, beta2=beta2)
 
 alias = [
   'gd',
