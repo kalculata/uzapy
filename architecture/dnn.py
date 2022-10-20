@@ -29,6 +29,9 @@ class DNN(Optimezer):
 			self.layers.append(Dense(name, self.layers[-1].nodes, nodes, activation, w_initializer, b_inititializer))
 
 	def log(self):
+		if not self.is_compiled:
+			raise RuntimeError("model isn't compiled")
+
 		l_type       = len("Name(Type)")
 		l_output     = len("Output")
 		l_param      = len("Parameters")
@@ -85,6 +88,9 @@ class DNN(Optimezer):
 		self.is_compiled = True
 
 	def train(self, train_data, test_data=None, lr=0.01, epoch=10, batch_size=None, shuffle=False, verbose=False):
+		if not self.is_compiled:
+			raise RuntimeError("model isn't compiled")
+			
 		self.x_train, self.y_train = train_data
 		self.x_test, self.y_test   = test_data
 		self.lr = lr
