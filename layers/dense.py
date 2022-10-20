@@ -14,9 +14,17 @@ class Dense:
 		self.w_initializer = w_initializer
 		self.b_initializer = b_initializer
 
-	def log(self):
+	def info(self):
 		parameters = (self.input_nodes * self.nodes) + self.nodes
-		print(f"{self.nodes}\t {parameters}\t {self.activation}\t {self.name}")
+
+		return {
+			'type'       : self.__str__(),
+			'nodes'      : str(self.nodes),
+			'parameters' : str(parameters),
+			'activation' : self.activation if(self.activation) else '',
+			'name'       : self.name if(self.name) else '',
+		}
+	
 
 	def initialize(self):
 		if self.w_initializer not in initializers_name:
@@ -35,3 +43,6 @@ class Dense:
 		if not isinstance(self.activation, ActivationFunction) and self.activation not in activations_name:
 			raise ValueError(f"activation '{self.activation}' does't exist.")
 		return activate(self.activation, _output)
+
+	def __str__(self):
+		return 'Dense'

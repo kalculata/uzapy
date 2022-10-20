@@ -98,9 +98,20 @@ NB: you must use train mean and std to normalize test set and also when you want
 
 ## TODO
 
+- [ ] Input layer
+- [ ] Neural Network log
+- [ ] cool model log
+- [ ] Flatten layer
+- [ ] Dropout layer
+- [ ] sparse categorical crossentropy
+- [ ] sparse categorical accuracy
+- [ ] auto select accuracy
+- [ ] conv2d (convolution, padding, strike)
+- [ ] maxpooling2d
+
+## LAKE
+
 - [ ] CNN (Convolutional Neural Network)
-  - Feature learning
-  - classification
 - [ ] RNN (Recurrent Neural Network)
 - [ ] LSTM (Long short-term memory)
 - [ ] Neural Network

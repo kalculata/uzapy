@@ -14,6 +14,10 @@ class DNN(Optimezer):
 
 		self.input_nodes = input_nodes
 		self.is_compiled = False
+		self.name				 = None
+	
+	def set_name(self, name):
+		self.name = name
 
 	def add(self, nodes, activation='relu', name=None, w_initializer='xavier_uniform', b_inititializer='zeros'):
 		if not isinstance(activation, (str, ActivationFunction)) and activation is not None:
@@ -25,9 +29,50 @@ class DNN(Optimezer):
 			self.layers.append(Dense(name, self.layers[-1].nodes, nodes, activation, w_initializer, b_inititializer))
 
 	def log(self):
-		print("Nodes \t Parameters \t Activation \t Name")
+		l_type       = len("Name(Type)")
+		l_output     = len("Output")
+		l_param      = len("Parameters")
+		l_activation = len("Activation")
+		l_name       = len("Name")
+
 		for layer in self.layers:
-			layer.log()
+			if l_type < len(layer.info()['name']) + len(layer.info()['type']):
+				l_type  = len(layer.info()['name']) + len(layer.info()['type'])
+
+			if l_output < len(layer.info()['nodes']):
+				l_output = len(layer.info()['nodes'])
+
+			if l_param < len(layer.info()['parameters']):
+				l_param  = len(layer.info()['parameters'])
+
+			if l_activation < len(layer.info()['activation']):
+				l_activation = len(layer.info()['activation'])
+			
+			if l_name < len(layer.info()['name']):
+				l_name = len(layer.info()['name'])
+		
+		headers   = f"Name(Type) {' '*(l_type+2-10)} Output {' '*(l_output+2-6)} Parameters {' '*(l_param+2-10)} Activation {' '*(l_activation+2-10)}"
+		line_size = len(headers)
+		print(headers)
+		print("="*line_size)
+
+		n_parameters = 0
+
+		for layer in self.layers:
+			name_type  = f"{layer.info()['name']}({layer.info()['type']})"
+			type   		 = f"{name_type} {' '*(l_type+2-len(name_type))}"
+			output 		 = f"{layer.info()['nodes']     } {' '*(l_output+2-len(layer.info()['nodes']))}"
+			param 		 = f"{layer.info()['parameters']} {' '*(l_param+2-len(layer.info()['parameters']))}"
+			activation = f"{layer.info()['activation']} {' '*(l_activation+2-len(layer.info()['activation']))}"
+			name 			 = f"{layer.info()['name']      } {' '*(l_name+2-len(layer.info()['name']))}"
+
+			print(f"{type} {output} {param} {activation} {name}")
+			print("_"*line_size)
+
+			n_parameters += int(layer.info()['parameters'])
+		
+		print("Model Name      : ", self.name)
+		print("Total paramters : ", n_parameters)
 
 	def compile(self, loss, optimizer, metrics=[]):
 		self.loss_func = loss
