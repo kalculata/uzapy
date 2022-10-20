@@ -1,0 +1,2 @@
+class Flatten:
+  pass

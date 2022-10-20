@@ -4,6 +4,10 @@ Uzapy is Python deep learning framework.
 
 ## Features
 
+### Architecture
+
+- Dense Neural Network (DNN)
+
 ### Optimezers
 
 - gd      (Gradient Descent)
@@ -94,8 +98,14 @@ NB: you must use train mean and std to normalize test set and also when you want
 
 ## TODO
 
+- [ ] CNN (Convolutional Neural Network)
+  - Feature learning
+  - classification
+- [ ] RNN (Recurrent Neural Network)
+- [ ] LSTM (Long short-term memory)
 - [ ] Neural Network
-- [ ] Perception
+- [ ] Transformers
+- [ ] Genetic algorithms
 - [ ] Linear regression
 - [ ] Logestic regression
 - [ ] Decision tree
@@ -107,16 +117,10 @@ NB: you must use train mean and std to normalize test set and also when you want
 - [ ] AdaBoosting
 - [ ] Gradient boosting
 - [ ] K-Means
-- [ ] Genetic algorithms
-- [ ] DNN (Dense Neural Network)
-- [ ] CNN (Convolutional Neural Network)
-- [ ] RNN (Recurrent Neural Network)
-- [ ] LSTM (Long short-term memory)
-- [ ] Transformers
 
 ### Projects
 
-- [ ] chatbot from scratch
+- [ ] chatbot
 - [ ] face detection
-- [ ] flou remouver in images
-- [ ] SpeechRecognition from scratch
+- [ ] flou remover
+- [ ] SpeechRecognition

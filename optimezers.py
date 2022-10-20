@@ -50,9 +50,9 @@ class Optimezer:
     return activations
 
   def backward(self, activations, y_train):
-    C         = len(self.layers)
-    dZ        = activations['A' + str(C)] - y_train
-    m         = y_train.shape[1]
+    C  = len(self.layers)
+    dZ = activations['A' + str(C)] - y_train
+    m  = y_train.shape[1]
 
     for c in reversed(range(1, C+1)): 
       dW = 1/m * np.dot(dZ, activations['A' + str(c-1)].T)
