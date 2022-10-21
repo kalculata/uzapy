@@ -67,6 +67,9 @@ class Base:
       n_parameters += int(layer.info()['parameters'])
 
     print("Total parameters : ", n_parameters)
+    if str(self) == 'Dense Neural Network':
+      print("Input Nodes      : ", self.input_nodes)
     print("Model Name       : ", self.name)
     print("Model Type       : ", self)
+
 

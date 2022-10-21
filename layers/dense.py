@@ -10,17 +10,21 @@ class Dense:
 		self.output_shape  = None
 		self.parameters    = None
 
-		self.nodes       	 = nodes
 		self.activation  	 = activation
-		self.weights     	 = None
-		self.biais       	 = None
 		self.w_initializer = w_initializer
 		self.b_initializer = b_initializer
+
+		self.nodes       	 = nodes
+		self.weights     	 = None
+		self.biais       	 = None
 
 	def __str__(self):
 		return 'Dense'
 
 	def _initialize(self, prev_input_nodes):
+		if isinstance(prev_input_nodes, tuple):
+			prev_input_nodes = prev_input_nodes[0]
+
 		self.input_nodes = prev_input_nodes
 		self.output_shape = (self.nodes, 1)
 		self.parameters = (self.input_nodes * self.nodes) + self.nodes
@@ -43,8 +47,6 @@ class Dense:
 		return activate(self.activation, _output)
 
 	def info(self):
-		
-
 		return {
 			'type'         : self.__str__(),
 			'output_shape' : str(self.output_shape),
