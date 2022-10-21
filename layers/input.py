@@ -8,7 +8,7 @@ class Input:
     return 'Input'
 
   def output(self, input):
-    pass
+    return input
 
   def info(self):
     return {
