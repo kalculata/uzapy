@@ -131,13 +131,13 @@ class Model:
         itr_start_idx = itr_end_idx
         itr_end_idx   = itr_end_idx + self.batch_size if (itr_end_idx + self.batch_size < n) else n
   
-  def compile(self, loss, optimizer, metrics=[]):
+  def compile(self, loss, optimezer, metrics=[]):
     self.loss_func = loss
-    self.optimezer = optimizer
+    self.optimezer = optimezer
     self.metrics   = metrics
 
     for layer in self.layers:
-      if layer.is_trainable:
+      if layer.trainable:
         layer.initialize()
 
     self.is_compiled = True
