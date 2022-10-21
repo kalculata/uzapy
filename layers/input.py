@@ -1,7 +1,7 @@
 class Input:
   def __init__(self, shape, name=None):
     self.name          = name
-    self.trainable     = True
+    self.trainable     = False
     self.shape         = shape
 
   def __str__(self) -> str:
