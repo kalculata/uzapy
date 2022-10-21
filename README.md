@@ -98,7 +98,7 @@ NB: you must use train mean and std to normalize test set and also when you want
 
 ## TODO
 
-- [ ] layers output shape and parameters calculation
+- [x] layers output shape and parameters calculation
 - [ ] cnn layer initialization
 - [ ] cnn convolution
 - [ ] cnn padding

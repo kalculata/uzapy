@@ -17,9 +17,9 @@ class Dropout:
 
   def info(self):
     return {
-      'type'       : self.__str__(),
-      'output_shape'      : str(100),
-      'parameters' : str(0),
-      'activation' : '-',
-      'name'       : self.name if(self.name) else '',
+      'type'         : self.__str__(),
+      'output_shape' : str(self.output_shape),
+      'parameters'   : str(0),
+      'activation'   : '-',
+      'name'         : self.name if(self.name) else '',
     }

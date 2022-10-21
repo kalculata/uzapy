@@ -4,11 +4,14 @@ class Base:
     self.optimezer = optimezer
     self.metrics   = metrics
 
-    prev_output = self.layers[0].output_shape
+    if str(self.layers[0]) != 'Input':
+      raise ValueError("First layer must be of tye 'Input'")
+
+    prev_output_shape = self.layers[0].output_shape
 
     for i in range(1, len(self.layers)):
-      self.layers[i]._initialize(prev_output)
-      prev_output = self.layers[i].output_shape
+      self.layers[i]._initialize(prev_output_shape)
+      prev_output_shape = self.layers[i].output_shape
 
     self.is_compiled = True
 
