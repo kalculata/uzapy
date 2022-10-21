@@ -4,12 +4,17 @@ class Base:
     self.optimezer = optimezer
     self.metrics   = metrics
 
-    if str(self.layers[0]) != 'Input':
+    if str(self.layers[0]) != 'Input' and str(self) != 'Dense Neural Network':
       raise ValueError("First layer must be of tye 'Input'")
 
-    prev_output_shape = self.layers[0].output_shape
+    if str(self) == 'Dense Neural Network':
+      prev_output_shape = self.input_nodes
+      start = 0
+    else:
+      start = 1
+      prev_output_shape = self.layers[0].output_shape
 
-    for i in range(1, len(self.layers)):
+    for i in range(start, len(self.layers)):
       self.layers[i]._initialize(prev_output_shape)
       prev_output_shape = self.layers[i].output_shape
 
@@ -20,8 +25,8 @@ class Base:
       raise RuntimeError("model isn't compiled")
 
     l_type       = len("Name(Type)")
-    l_output     = len("Output")
-    l_param      = len("Parameters")
+    l_output     = len("Output shape")
+    l_param      = len("#Parameters")
     l_activation = len("Activation")
     l_name       = len("Name")
 
@@ -41,7 +46,7 @@ class Base:
       if l_name < len(layer.info()['name']):
         l_name = len(layer.info()['name'])
 
-    headers   = f"Name(Type) {' '*(l_type+2-10)} Output {' '*(l_output+2-6)} Parameters {' '*(l_param+2-10)} Activation {' '*(l_activation+2-10)}"
+    headers   = f"Name(Type) {' '*(l_type+2-10)} Output shape {' '*(l_output+2-12)} #Parameters {' '*(l_param+2-11)} Activation {' '*(l_activation+2-10)}"
     line_size = len(headers)
     print(headers)
     print("="*line_size)
@@ -61,6 +66,7 @@ class Base:
 
       n_parameters += int(layer.info()['parameters'])
 
-    print("Model Name      : ", self.name)
-    print("Total paramters : ", n_parameters)
+    print("Total parameters : ", n_parameters)
+    print("Model Name       : ", self.name)
+    print("Model Type       : ", self)
 

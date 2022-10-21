@@ -4,12 +4,12 @@ from activations import ActivationFunction, activate, alias as activations_name
 
 
 class Dense:
-	def __init__(self, input_nodes, nodes, activation, w_initializer='xavier_uniform', b_initializer='zeros', name=None):
+	def __init__(self, nodes, activation, w_initializer='xavier_uniform', b_initializer='zeros', name=None):
 		self.name        	 = name
 		self.trainable     = True
 		self.output_shape  = None
+		self.parameters    = None
 
-		self.input_nodes 	 = input_nodes
 		self.nodes       	 = nodes
 		self.activation  	 = activation
 		self.weights     	 = None
@@ -20,7 +20,11 @@ class Dense:
 	def __str__(self):
 		return 'Dense'
 
-	def _initialize(self):
+	def _initialize(self, prev_input_nodes):
+		self.input_nodes = prev_input_nodes
+		self.output_shape = (self.nodes, 1)
+		self.parameters = (self.input_nodes * self.nodes) + self.nodes
+
 		if self.w_initializer not in initializers_name:
 			raise ValueError(f"initializer '{self.w_initializer}' does't exist.")
 		if self.b_initializer not in initializers_name:
@@ -39,12 +43,12 @@ class Dense:
 		return activate(self.activation, _output)
 
 	def info(self):
-		parameters = (self.input_nodes * self.nodes) + self.nodes
+		
 
 		return {
-			'type'       : self.__str__(),
-			'output_shape'      : str(self.nodes),
-			'parameters' : str(parameters),
-			'activation' : self.activation if(self.activation) else '',
-			'name'       : self.name if(self.name) else '',
+			'type'         : self.__str__(),
+			'output_shape' : str(self.output_shape),
+			'parameters'   : str(self.parameters),
+			'activation'   : self.activation if(self.activation) else '',
+			'name'         : self.name if(self.name) else '',
 		}
