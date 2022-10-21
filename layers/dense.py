@@ -7,6 +7,7 @@ class Dense:
 	def __init__(self, input_nodes, nodes, activation, w_initializer='xavier_uniform', b_initializer='zeros', name=None):
 		self.name        	 = name
 		self.trainable     = True
+		self.output_shape  = None
 
 		self.input_nodes 	 = input_nodes
 		self.nodes       	 = nodes

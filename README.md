@@ -98,15 +98,19 @@ NB: you must use train mean and std to normalize test set and also when you want
 
 ## TODO
 
+- [ ] layers output shape and parameters calculation
+- [ ] cnn layer initialization
+- [ ] cnn convolution
+- [ ] cnn padding
+- [ ] cnn strike
 - [ ] Input layer
-- [ ] Neural Network log
-- [ ] cool model log
+- [x] Neural Network log
+- [x] cool model log
 - [ ] Flatten layer
 - [ ] Dropout layer
 - [ ] sparse categorical crossentropy
 - [ ] sparse categorical accuracy
 - [ ] auto select accuracy
-- [ ] conv2d (convolution, padding, strike)
 - [ ] maxpooling2d
 
 ## LAKE

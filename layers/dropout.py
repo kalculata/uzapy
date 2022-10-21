@@ -1,15 +1,16 @@
 class Dropout:
   def __init__(self, frac, name=None):
-    self.name = name
-    self.trainable     = False
+    self.name         = name
+    self.trainable    = False
+    self.output_shape = None
 
-    self.frac = frac
+    self.frac         = frac
 
   def __str__(self) -> str:
     return 'Dropout'
   
-  def _initialize(self):
-    pass
+  def _initialize(self, prev_output_shape):
+    self.output_shape = prev_output_shape
 
   def output(self, input):
     pass
