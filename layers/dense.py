@@ -19,7 +19,7 @@ class Dense:
 	def __str__(self):
 		return 'Dense'
 
-	def initialize(self):
+	def _initialize(self):
 		if self.w_initializer not in initializers_name:
 			raise ValueError(f"initializer '{self.w_initializer}' does't exist.")
 		if self.b_initializer not in initializers_name:
@@ -42,7 +42,7 @@ class Dense:
 
 		return {
 			'type'       : self.__str__(),
-			'nodes'      : str(self.nodes),
+			'output_shape'      : str(self.nodes),
 			'parameters' : str(parameters),
 			'activation' : self.activation if(self.activation) else '',
 			'name'       : self.name if(self.name) else '',

@@ -1,18 +1,19 @@
 class Conv2D:
-  def __init__(self, filters, kernel_shape, strike=1, activation='relu', name=None):
+  def __init__(self, filters, kernel_shape, strike=1, padding=0, activation='relu', name=None):
     self.name          = name
     self.trainable     = True
 
-    self.filters = filters
+    self.n_filters = filters
     self.kernel_shape  = kernel_shape
     self.strike        = strike
     self.activation    = activation
+    self.padding       = padding
 
   def __str__(self) -> str:
     return 'Conv2D'
   
-  def initialize(self):
-    pass
+  def _initialize(self, prev_layer_out):
+    self.output_shape = (prev_layer_out[0]-self.kernel_shape+1, prev_layer_out[1]-self.kernel_shape+1, self.n_filters)
 
   def output(self, input):
     pass
@@ -22,7 +23,7 @@ class Conv2D:
 
     return {
       'type'       : self.__str__(),
-      'nodes'      : str(100),
+      'output_shape' : str(self.output_shape),
       'parameters' : str(parameters),
       'activation' : self.activation if(self.activation) else '-',
       'name'       : self.name if(self.name) else '',
