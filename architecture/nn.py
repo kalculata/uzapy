@@ -9,13 +9,3 @@ class NeuralNetwork(Model):
   
   def add(self, layer):
     self.layers.append(layer)
-
-  def compile(self, loss, optimezer, metrics=[]):
-    self.loss = loss
-    self.optimezer = optimezer
-    self.metrics = metrics
-
-    for layer in self.layers:
-      layer.initialize()
-    
-    self.is_compiled = True
