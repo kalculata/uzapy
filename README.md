@@ -103,7 +103,7 @@ NB: you must use train mean and std to normalize test set and also when you want
 - [ ] cnn convolution
 - [ ] cnn padding
 - [ ] cnn strike
-- [ ] Input layer
+- [x] Input layer backpropagation
 - [x] Neural Network log
 - [x] cool model log
 - [ ] Flatten layer

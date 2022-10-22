@@ -1,4 +1,5 @@
 import numpy as np
+from layers.input import Input
 from tools import compute_iterations, shuffle
 
 
@@ -21,7 +22,7 @@ class Model:
     self.batch_size   = None
 
   def optimeze(self):
-    if isinstance(self.optimezer, OptimezerClass):
+    if isinstance(self.optimezer, Optimezer):
       self.epislon   = self.optimezer.epislon
       self.beta      = self.optimezer.beta
       self.beta2     = self.optimezer.beta2
@@ -55,6 +56,9 @@ class Model:
     m  = y_train.shape[1]
 
     for c in reversed(range(1, C+1)): 
+      if not self.layers[c-1].trainable:
+        continue
+
       dW = 1/m * np.dot(dZ, activations['A' + str(c-1)].T)
       db = 1/m * np.sum(dZ, axis=1, keepdims=True)
 
@@ -94,6 +98,8 @@ class Model:
 
   def update(self): 
     for c in range(len(self.layers)):
+      if not self.layers[c].trainable:
+        continue
 
       if self.optimezer == 'gd' or self.optimezer == 'sgd':
         self.layers[c].weights = self.layers[c].weights - self.lr * self.gradients['dW' + str(c+1)]

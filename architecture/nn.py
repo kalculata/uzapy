@@ -3,6 +3,8 @@ from architecture.base import Base
 
 class NeuralNetwork(Model, Base):
   def __init__(self, name=None):
+    super().__init__()
+    
     self.layers = []
     self.is_compiled = False
     self.name = name
