@@ -1,7 +1,7 @@
 from tqdm import tqdm
 
-from losses import cost
-from metrics import metrics
+from uzapy.losses import cost
+from uzapy.metrics import metrics
 import matplotlib.pyplot as plt
 
 class Base:
@@ -10,8 +10,9 @@ class Base:
     self.optimezer = optimezer
     self.metrics   = metrics
 
-    if str(self.layers[0]) != 'Input' and str(self) != 'Dense Neural Network':
-      raise ValueError("First layer must be of tye 'Input'")
+    if not(str(self.layers[0]) == 'Input' or str(self.layers[0]) == 'Flatten'
+    ) and str(self) != 'Dense Neural Network':
+      raise ValueError("First layer must be of tye 'Input' or 'Flatten'")
 
     if str(self) == 'Dense Neural Network':
       prev_output_shape = self.input_nodes
@@ -71,8 +72,8 @@ class Base:
       if 'test_' + metric not in self.history.keys():
         self.history['train_'  + metric] = []
         self.history['test_'  + metric] = []
-      self.history['train_' + metric].append(metrics(metric, self.y_train, train_y_pred))
-      self.history['test_'  + metric].append(metrics(metric, self.y_test,  test_y_pred))
+      self.history['train_' + metric].append(metrics(metric, self.y_train, train_y_pred, self.loss_func))
+      self.history['test_'  + metric].append(metrics(metric, self.y_test,  test_y_pred, self.loss_func))
 		
   def predict(self, input):
     return self.forward(input)['A' + str(len(self.layers))]
@@ -146,5 +147,3 @@ class Base:
       print("Input Nodes      : ", self.input_nodes)
     print("Model Name       : ", self.name)
     print("Model Type       : ", self)
-
-

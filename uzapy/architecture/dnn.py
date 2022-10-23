@@ -1,12 +1,7 @@
-import matplotlib.pyplot as plt
-
-
-from activations import ActivationFunction
-from architecture.base import Base
-from layers.dense import Dense
-from losses import cost
-from metrics import metrics
-from optimezers import Model
+from uzapy.activations import ActivationFunction
+from uzapy.architecture.base import Base
+from uzapy.layers.dense import Dense
+from uzapy.optimezers import Model
 
 
 class DNN(Model, Base):

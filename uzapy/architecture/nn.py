@@ -1,5 +1,5 @@
-from optimezers import Model
-from architecture.base import Base
+from uzapy.optimezers import Model
+from uzapy.architecture.base import Base
 
 class NeuralNetwork(Model, Base):
   def __init__(self, name=None):

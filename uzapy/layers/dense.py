@@ -1,5 +1,5 @@
-from initializers import generate, alias as initializers_name
-from activations import ActivationFunction, activate, alias as activations_name
+from uzapy.initializers import generate, alias as initializers_name
+from uzapy.activations import ActivationFunction, activate, alias as activations_name
 
 
 
@@ -21,11 +21,11 @@ class Dense:
 	def __str__(self):
 		return 'Dense'
 
-	def _initialize(self, prev_input_nodes):
-		if isinstance(prev_input_nodes, tuple):
-			prev_input_nodes = prev_input_nodes[0]
-
-		self.input_nodes = prev_input_nodes
+	def _initialize(self, input_nodes):
+		if isinstance(input_nodes, tuple):
+			input_nodes = input_nodes[0]
+		
+		self.input_nodes  = input_nodes
 		self.output_shape = (self.nodes, 1)
 		self.parameters = (self.input_nodes * self.nodes) + self.nodes
 

@@ -1,6 +1,5 @@
 import numpy as np
-from layers.input import Input
-from tools import compute_iterations, shuffle
+from uzapy.tools import compute_iterations, shuffle
 
 
 class Model:
@@ -83,6 +82,9 @@ class Model:
           self.gradients['sW_' + str(c)] = 0
           self.gradients['sb_' + str(c)] = 0
         
+        if self.optimezer == 'rmsprop':
+          self.beta = self.beta2
+
         sW = (self.beta * self.gradients['sW_' + str(c)]) + ((1 - self.beta2) * np.square(dW))
         sb = (self.beta * self.gradients['sb_' + str(c)]) + ((1 - self.beta2) * np.square(db))
         self.gradients['sW' + str(c)]  = sW
@@ -122,13 +124,17 @@ class Model:
     self.backward(train_activations, y_train)
     
   def sgd(self):
-    n             = self.x_train.shape[1]
+    n             = self.x_train.shape[-1]
     iterations    = compute_iterations(n, self.batch_size)
     itr_start_idx = 0
     itr_end_idx   = self.batch_size
 
     for itr in range(1, iterations+1):
-      x_train = self.x_train[:, itr_start_idx:itr_end_idx]
+      if len(self.x_train.shape) == 3:
+        x_train = self.x_train[:, :, itr_start_idx:itr_end_idx]
+      else:
+        x_train = self.x_train[:, itr_start_idx:itr_end_idx]
+        
       y_train = self.y_train[:, itr_start_idx:itr_end_idx]
 
       self.gd(x_train, y_train)

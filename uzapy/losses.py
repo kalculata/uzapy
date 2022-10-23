@@ -13,7 +13,7 @@ def cost(loss, y_true, y_pred):
     return binary_crossentropy(y_true, y_pred)
   elif loss == 'categorical_crossentropy':
     return categorical_crossentropy(y_true, y_pred)
-  elif loss == 'binary_crossentropy':
+  elif loss == 'sparse_categorical_crossentropy':
     return sparse_categorical_crossentropy(y_true, y_pred)
 
 def mse(y_true, y_pred):

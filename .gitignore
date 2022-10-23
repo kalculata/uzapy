@@ -3,7 +3,7 @@ env/
 *.csv
 *.hdf5
 
-dev.ipynb
+*.ipynb
 dev.py
 
 datasets/

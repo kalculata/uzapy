@@ -1,11 +1,17 @@
 import numpy as np
 
-from losses import cost, alias as losses_alias
+from uzapy.losses import cost, alias as losses_alias
 
 
-def metrics(metric, y_true, y_pred, threshold=0.5):
+def metrics(metric, y_true, y_pred, loss, threshold=0.5):
   if metric not in alias and metric not in losses_alias:
     raise ValueError(f"metric '{metric}' doesn't exist.")
+
+  if metric == 'accuracy':
+    if loss == "binary_crossentropy": 
+      metric = 'binary_accuracy'
+    elif loss == "categorical_crossentropy":
+      metric = 'categorical_accuracy'
 
   if metric == 'binary_accuracy':
     return binary_accuracy(y_true, y_pred, threshold)
@@ -35,5 +41,6 @@ def categorical_accuracy(y_true, y_pred):
 
 alias = [
   'binary_accuracy',
-  'categorical_accuracy'
+  'categorical_accuracy',
+  'accuracy'
 ]
